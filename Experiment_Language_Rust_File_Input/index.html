@@ -1,0 +1,17 @@
+<!doctype html>
+<html lang="en-us">
+	<head>
+		<meta charset="utf-8">
+		<title>running a rust file</title>
+	<head>
+	<body>
+		<script type="module">
+			import { default as init } from "./pkg/file_input_1.js"; // js linker to process wasm
+			async function run() {
+				await init("./pkg/file_input_1_bg.wasm");
+			}
+			run(); // automatically run wasm once js is initialized
+		</script>
+		<p> check the console to see the output</p>
+	</body>
+</html>

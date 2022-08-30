@@ -1,0 +1,27 @@
+<!doctype html>
+<html lang="en-us">
+	<head>
+		<meta charset="utf-8">
+		<title>running a c file</title>
+	<head>
+	<body>
+		<script src="input2.js"></script>  <!-- use the javascript outputted by emscripten through the following command: "emcc hello.c" -->
+		<script> 
+			// make the two methods from the C program accessible from the browser console using Module.cwrap()
+			// cwrap: this function converts a compiled C function into a reusable JavaScript function and has three arguments. 
+			//	the first denotes the name of the fucntion from the C file. the second is the return type of the function 
+			// 	(either null, "number", "string", or "array"), and the final is an array of returned values. If the C 
+			//	function is type void, the final argument is ommitted.
+			// to run: open this file on localhost, inspect element, and type the function with a parameter into the console
+			// use: fib(int) and hello(string)
+			var fib = Module.cwrap("fib", "number", ["number"]);
+			var hello = Module.cwrap("hello", "string", ["string"]); 
+			function pressButton() { // when the button is pressed, a window prompt appears and asks the user to enter a number
+				const n = prompt("enter a number"); // the console then prints the following statement and runs the js function
+				console.log("the ",n,"th fibonacci number is ",fib(n)); 
+			}
+		</script>
+		<p>check the console to see the output</p>
+		<button onclick="pressButton()">fibonacci</button> 
+	</body>
+</html>

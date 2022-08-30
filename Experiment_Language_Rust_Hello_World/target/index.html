@@ -1,0 +1,17 @@
+<!doctype html>
+<html lang="en-us">
+	<head>
+		<meta charset="utf-8">
+		<title>running a rust file</title>
+	<head>
+	<body>
+		<p>check the console to see the output</p>
+		<script type="module"> 
+			import { default as init } from "./pkg/hello_world.js";
+			async function run() {
+				await init('./pkg/hello_world_bg.wasm');
+			}
+			run();
+		</script>
+	</body>
+</html>

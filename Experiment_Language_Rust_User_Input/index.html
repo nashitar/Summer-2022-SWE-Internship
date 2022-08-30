@@ -1,0 +1,26 @@
+<!doctype html>
+<html lang="en-us">
+	<head>
+		<meta charset="utf-8">
+		<title>running a rust file</title>
+	<head>
+	<body>
+		<script type = "module">
+			import { add, default as init } from './pkg/user_input_1.js'; // javascript link to process wasm
+			init().then(() => {}); // run above script
+			document.getElementById("addbutton").onclick = () => { 
+				let a = parseInt(document.getElementById("number1").value);
+				let b = parseInt(document.getElementById("number2").value);
+				console.log(add(a, b)); // run rust function given frontend inputs
+			}
+		</script>
+		<label for = "number1">enter an integer: </label>
+		<input type = "text" id = "number1">
+		<br>
+		<label for = "number2">enter another integer: </label>
+		<input type = text" id = "number2">
+		<button id = "addbutton">add</button>
+		<br>
+		<p> check the console to see the output</p>
+	</body>
+</html>

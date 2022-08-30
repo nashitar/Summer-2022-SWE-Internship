@@ -1,0 +1,23 @@
+<html>
+<body>
+	<input type="file" id="myfile" onchange="load()"> <!-- button to choose file -->
+</body>
+<script type="text/javascript">
+	// a FileReader allows web apps read the contents of files stored on the computer
+	let reader= new FileReader(); 
+	function load(){
+		let file = document.getElementById('myfile').files[0]; // file is selected from computer 
+		reader.addEventListener('loadend', print); // run print on the selected file 
+		reader.readAsArrayBuffer(file);
+	}
+	function print(e){
+		// convert the file selected by the user into an unsigned int array that can be read to a
+		// text file that can be read by the wasm program
+		let result = reader.result;
+		const uint8_view = new Uint8Array(result);
+		FS.writeFile('write.txt', uint8_view)
+		Module.ccall('print', 'number', ['string'], ['write.txt'])
+	}
+</script>
+<script type="text/javascript" src="filein.js"></script>
+</html>
